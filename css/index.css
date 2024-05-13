@@ -1,0 +1,157 @@
+/*
+  Index CSS
+  data 06.05.2024
+  by Gianluca Chiaravalloti
+*/
+
+/* Mobile */
+.card-home {
+  text-align: center;
+  border-radius: 10px;
+  color: #000;
+}
+
+.card-home img {
+  width: 250px;
+  height: 300px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card-home:hover {
+  cursor: pointer;
+}
+
+.card-title {
+  height: 60px;
+  font-size: 1.1rem;
+}
+
+.btnAdd {
+  font-size: 0.9rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -20px;
+}
+
+.detailProduct {
+  font-size: 0.9rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-cart {
+  border: 0;
+}
+
+.card-cart img {
+  border-radius: 0;
+  padding: 10px;
+  height: 110px;
+  margin-left: 10px;
+}
+
+.card-cart {
+  font-size: 0.8rem;
+}
+
+.card-shopping {
+  height: 20px;
+  font-size: 1.3rem;
+}
+
+.border-line {
+  border-bottom: 1px solid #969494;
+}
+
+.totalPrice {
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: block;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+/* View Tablet */
+@media (min-width: 431px) {
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .card-home {
+    width: 200px;
+    box-shadow: 2px 4px 10px 5px #969494;
+    margin-bottom: 10px;
+  }
+
+  .card-home img {
+    width: 150px;
+    height: 240px;
+  }
+
+  .card-cart img {
+    border-radius: 0;
+    height: 120px;
+  }
+
+  .addProduct {
+    font-size: 0.9rem;
+  }
+
+  .totalPrice {
+    font-size: 1.2rem;
+  }
+
+}
+/* End Tablet */
+
+
+/* View Desktop */
+@media (min-width: 1439px) {
+
+  .navbar-brand {
+    font-size: 2.0rem;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+
+  .card-home {
+    width: 250px;
+    box-shadow: 2px 4px 10px 5px #969494;
+    margin-bottom: 25px;
+    transition: 0.3s;
+  }
+  
+  .card-home img {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .card-home:hover{
+    cursor: pointer;
+    transform: scale(1.06);
+  }
+
+  .card-cart img {
+    border-radius: 0;
+    height: 120px;
+  }
+
+  .addProduct {
+    font-size: 0.9rem;
+  }
+
+  .totalPrice {
+    font-size: 1.2rem;
+  }
+  
+  #product-detail img {
+    width: 350px;
+  }
+
+}
+/* End Desktop */
+

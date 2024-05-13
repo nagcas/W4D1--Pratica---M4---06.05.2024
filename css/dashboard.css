@@ -1,0 +1,55 @@
+/*
+  Dashboard CSS
+  data 06.05.2024
+  by Gianluca Chiaravalloti
+*/
+
+.hero {
+  margin-top: 120px;
+  border-bottom: 1px solid #969494;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+}
+
+.content {
+  margin-top: 120px;
+}
+
+.sidebar h1 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.listProduct {
+  font-size: 0.8rem;
+}
+
+.listProduct td {
+  max-width: 180px;
+}
+
+#imageProduct {
+  width: 150px;
+}
+
+#viewImageProduct {
+  width: 50px;
+}
+
+.message-box {
+  width: 100%;
+  display: none;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+
+
+
+
+  
+

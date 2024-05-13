@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom CSS index.css -->
+  <link rel="stylesheet" href="./css/index.css">
+
+  <!-- Custom CSS global.css -->
+  <link rel="stylesheet" href="./css/global.css">
+  <title>EMarket</title>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="container-fluid fixed-top shadow p-0">
+    <nav class="navbar bg-body-tertiary fixed-top">
+      <div class="container">
+        <!-- Logo Market -->
+        <a class="navbar-brand" href="./index.html"><i class="bi bi-ubuntu"></i> EPICMarket</a>
+        <!-- Pulsante carrello con visualizzazione del numero dei prodotti selezionati con badge -->
+        <div class="me-2">
+          <a class="btn" href="./dashboard.html"><i class="bi bi-gear"></i> Dashboard</a>
+          <a class="btn"><i class="bi bi-person-circle"></i> Admin</a>
+          <button type="button" class="btn btn-ternary position-relative" data-bs-toggle="modal"
+            data-bs-target="#modalCart" id="shopping">
+            <i class="bi bi-cart2" id="cart"></i>
+            <span class="position-absolute start-80 translate-middle badge rounded-pill bg-danger z-1"
+              id="amount"></span>
+          </button>
+          <!-- Menù principale -->
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menù EPICMarket</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="./index.html"><i class="bi bi-house"></i>
+                    Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="bi bi-file-person"></i> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="bi bi-info-circle"></i> Info</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./dashboard.html"><i class="bi bi-gear"></i> Dashboard</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Pulsante visualizza menù principale -->
+          <button class="navbar-toggler justify-content-end" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- End Header -->
+
+  <!-- Section Hero -->
+  <section class="container hero">
+    
+    <div class="text-center">
+      <img class="d-block mx-auto" src="./img/366-4000x3000.jpg" alt="Image Market" width="152" height="124">
+      <h1 class="display-5 fw-bold text-body-emphasis"><i class="bi bi-ubuntu"></i> EPICMarket Store</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Change the game with EPICMarket: Technology that surprises, prices that convince!</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
+        <div class="title ">
+          <h3>Product <span>...</span></h3>
+        </div>
+      </div>
+      <!-- Funzione ricerca prodotto -->
+      <div class="col-sm-12 col-md-12 col-lg-6 d-flex justify-content-center justify-content-lg-end">
+
+
+        <div id="errore"></div>
+
+
+
+        <div class="input-group p-2">
+          <input type="text" name="search"
+            class="form-control focus-ring focus-ring-secondary py-1 px-1 text-decoration-none border text-center"
+            id="inputSearch" placeholder="search products">
+          <button class="btn btn-outline-secondary" type="submit" id="inputSearchBtn">
+            <i class="bi bi-search"></i>
+          </button>
+          <a class="btn btn-outline-secondary" id="inputResetBtn">CLEAR</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Section Hero -->
+
+  <!-- Section Products -->
+  <section class="container products">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-grow" role="status" id="spinner">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xl-5 justify-content-around content-products">
+      <!-- Visualizza il contenuto di tutte le card chiamate dall'API -->
+    </div>
+  </section>
+  <!-- End Section Products -->
+
+  <!-- Section Modal Cart -->
+  <div class="modal fade" id="modalCart" tabindex="-1" aria-labelledby="modalCartLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <!-- Visualizza il carrello dei prodotti selezionati per l'acquisto -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="madalCartLabel">Shopping Cart</h1>
+        </div>
+        <div class="modal-body"></div>
+        <p class="totalPrice"></p>
+        <!-- Gestione dei pulsanti  -->
+        <div class="modal-footer mt-2 d-flex justify-content-end align-items-center">
+          <button type="button" class="btn btn-secondary btn-sm btn-md" data-bs-dismiss="modal"><i class="bi bi-bag"></i> Continue Shopping</button>
+          <button type="button" class="btn btn-danger btn-sm btn-md d-none" data-bs-dismiss="modal" id="removeAllProducts"><i class="bi bi-cart-dash"></i> Remove all Books</button>
+          <button type="button" class="btn btn-success btn-sm btn-md d-none" data-bs-dismiss="modal" id="buy"><i class="bi bi-credit-card"></i> Buy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Section Modal Cart -->
+
+  <!-- Footer -->
+  <footer class="container-fluid p-4 mt-5 border-top shadow">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md">
+          <small class="d-block mb-3 text-body-white fs-2"><i class="bi bi-ubuntu"></i> Market ©2024</small>
+        </div>
+        <div class="col-sm-6 col-md">
+          <h5>Features</h5>
+          <ul class="list-unstyled text-small">
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Cool stuff</a></li>
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Random feature</a></li>
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Team feature</a></li>
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Stuff for developers</a></li>
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Another one</a></li>
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Last time</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Resource</a></li>
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Resource name</a></li>
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Another resource</a></li>
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Final resource</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-md">
+          <h5>About</h5>
+          <ul class="list-unstyled text-small">
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Team</a></li>
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Locations</a></li>
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Privacy</a></li>
+            <li class="mb-1"><a class="link-dark text-decoration-none" href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <!-- Javascrip Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+  <!-- Javascript index.js -->
+  <script src="./js/index.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom CSS dashboard.css -->
+  <link rel="stylesheet" href="./css/dashboard.css">
+
+  <!-- Custom CSS global.css -->
+  <link rel="stylesheet" href="./css/global.css">
+  <title>DashBoard - Admin</title>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="container-fluid fixed-top shadow p-0">
+    <nav class="navbar bg-body-tertiary fixed-top">
+      <div class="container">
+        <!-- Logo Market -->
+        <a class="navbar-brand" href="./index.html"><i class="bi bi-ubuntu"></i> EPICMarket</a>
+        <!-- Pulsante carrello con visualizzazione del numero dei prodotti selezionati con badge -->
+        <div class="me-2">
+          <a id="bell" class="btn"><i class="bi bi-bell"></i></a>
+          <a class="btn" href="./dashboard.html"><i class="bi bi-gear"></i> Dashboard</a>
+          <a class="btn"><i class="bi bi-person-circle"></i> Admin</a>
+          <!-- Menù principale -->
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menù Admin</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="./index.html"><i class="bi bi-house"></i>
+                    Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./dashboard.html"><i class="bi bi-gear"></i> Settings</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#infoDashboard"><i
+                      class="bi bi-info-circle"></i> Info</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="bi bi-info-square"></i> FAQs</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="bi bi-file-person"></i> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="bi bi-box-arrow-left"></i> Log Out</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Pulsante visualizza menù principale -->
+          <button class="navbar-toggler justify-content-end" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- End Header -->
+
+  <!-- Section contenuto della lista prodotti in forma di tabella -->
+  <section class="container content">
+    <div class="row">
+
+      <!-- Section sitebar sinistra -->
+      <div class="col-sm-12 col-md-12 col-lg-2 sidebar">
+        <h1>Dashboard</h1>
+
+        <!-- Section card informazione del numero dei prodotti inseriti -->
+        <div class="mt-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-center">Total Products</h5>
+              <hr class="divider">
+              <div class="d-flex justify-content-center align-content-center gap-3">
+                <p class="card-text"><i class="bi bi-box"></i></p>
+                <p class="card-text" id="totalProducts"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Section card informazione del numero dei prodotti inseriti -->
+
+        <!-- Menu sidebar sinistra -->
+        <ul class="nav col-md-4 justify-content-start">
+          <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-body-secondary">Home</a></li>
+          <li class="nav-item"><a href="./dashboard.html" class="nav-link px-2 text-body-secondary">Settings</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary" data-bs-toggle="modal" data-bs-target="#infoDashboard">Info</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+        </ul>
+        <!-- End menu sidebar sinistra -->
+
+      </div>
+      <!-- End Section sitebar left -->
+
+      <!-- Section prodotti -->
+      <div class="col-sm-12 col-md-12 col-lg-10 products">
+
+        <!-- Section Hero -->
+        <section class="container-fluid d-flex justify-content-between align-items-center m-4">
+          <p class="text-secondary m-0">Product List</p>
+          <div class="spinner-grow" role="status" id="spinner">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <button type="button" class="btn btn-success" id="buttonNewProduct" data-bs-toggle="modal"
+            data-bs-target="#newProduct">Create New Product</button>
+        </section>
+        <!-- End Section Hero -->
+
+        <!-- Messaggio di avviso -->
+        <div class="alert m-4 message-box" id="message-box" role="success"></div>
+        <!-- End Messaggio di avviso -->
+
+        <!-- Section contenuto della lista prodotti in forma di tabella  -->
+        <table class="table m-4">
+          <thead>
+            <tr>
+              <th class="col">id</th>
+              <th class="col">Name</th>
+              <th class="col">Description</th>
+              <th class="col">Brand</th>
+              <th class="col">Image Url</th>
+              <th class="col">Price</th>
+              <th class="col">Action</th>
+            </tr>
+          </thead>
+          <!-- Sezione dove viene creata la lista dei prodotti -->
+          <tbody id="tableProducts"></tbody>
+        </table>
+        <!-- End Section content product -->
+      </div>
+      <!-- End Section prodotti -->
+    </div>
+  </section>
+  <!-- End Section contenuto della lista prodotti in forma di tabella -->
+
+  <!-- Modal inserimento nuovo prodotto -->
+  <div class="modal fade" id="newProduct" tabindex="-1" aria-labelledby="newProductLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="newProductLabel"></h1>
+        </div>
+        <div class="modal-body">
+          <form id="createNewProduct" class="p-4">
+            <div class="mb-3">
+              <input type="hidden" class="form-control" id="_id" value="" required>
+              <label for="name" class="form-label fw-bold">Name*</label>
+              <input type="text" class="form-control" id="name" aria-describedby="namelHelp" value="">
+              <div id="namelHelp" class="form-text">Insert correctly the product name.</div>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label fw-bold">Description*</label>
+              <textarea type="text" class="form-control" id="description" 
+                aria-describedby="descriptionHelp" value=""></textarea>
+              <div id="descriptionHelp" class="form-text">Insert correctly the product description.</div>
+            </div>
+            <div class="mb-3">
+              <label for="brand" class="form-label fw-bold">Brand*</label>
+              <input type="text" class="form-control" id="brand" aria-describedby="brandHelp" value="">
+              <div id="brandHelp" class="form-text">Insert correctly the product brand.</div>
+            </div>
+            <div class="mb-3">
+              <label for="imageUrl" class="form-label fw-bold">Image Url*</label>
+              <input type="url" class="form-control" id="imageUrl" 
+                aria-describedby="imageUrlHelp" value="">
+              <div id="imageUrlHelp" class="form-text">Insert correctly the product url image.</div>
+            </div>
+            <div class="mb-3">
+              <label for="price" class="form-label fw-bold">Price* €</label>
+              <input type="text" class="form-control" id="price" aria-describedby="priceHelp" value="">
+              <div id="priceHelp" class="form-text">Insert correctly the product price.</div>
+            </div>
+            <div class="modal-footer">
+              <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="buttonCreateProduct"
+                onclick="createProduct()">Create</button>
+              <button type="button" class="btn btn-primary d-none" data-bs-dismiss="modal" id="buttonModifyProduct"
+                onclick="modifyProduct()">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal inserimento nuovo prodotto -->
+
+  <!-- Modal Informazioni sull'utilizzo della dashboard -->
+  <div class="modal fade" id="infoDashboard" tabindex="-1" aria-labelledby="infoDashboardLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="infoDashboardLabelLabel">Info Dashboard</h1>
+        </div>
+        <div class="modal-body">
+          <p>Come utilizzare la dashboard</p>
+          <p>Per creare un nuovo elemento fai click sul bottone: <button type="button" class="btn btn-success">Create
+              New Product</button></p>
+          <p>Per visualizzare un prodotto esistente clicca sul bottone "preview" della sezione action. <a
+              class="btn btn-success"><i class="bi bi-view-stacked"></i></a></p>
+          <p>Per modificare un prodotto esistente clicca sul bottone "modify" della sezione action. <a
+              class="btn btn-warning"><i class="bi bi-pencil-square"></i></a></p>
+          <p>Per eliminare un prodotto esistente clicca sul bottone "delete" della sezione action. <a
+              class="btn btn-danger"><i class="bi bi-trash"></i></a></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal Informazioni sull'utilizzo della dashboard -->
+
+  <!-- Modal visualizza prodotto in anteprima -->
+  <div class="modal fade" id="previewProduct" tabindex="-1" aria-labelledby="previewProductLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="previewProductLabel">View Single Product</h1>
+        </div>
+        <div class="modal-body">
+          <div id="previewSingleProduct"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal visualizza prodotto in anteprima -->
+
+  <!-- Modal cancella prodotto -->
+  <div class="modal fade" id="deleteProduct" tabindex="-1" aria-labelledby="deleteProductLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteProductLabel">Delete Product</h1>
+        </div>
+        <div class="modal-body">
+          <div id="deleteSingleProduct"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal cancella prodotto -->
+
+  <!-- Footer -->
+  <footer class="container d-flex justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-body-secondary"><i class="bi bi-ubuntu"></i> Market © 2024</p>
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+    </a>
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Settings</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Info</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+    </ul>
+  </footer>
+  <!-- End Footer -->
+
+  <!-- Javascrip Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+  <!-- Javascript dashboard.js -->
+  <script src="./js/dashboard.js"></script>
+
+</body>
+</html>

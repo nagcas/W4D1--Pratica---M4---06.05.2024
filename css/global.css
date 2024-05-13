@@ -1,0 +1,125 @@
+/*
+  Global CSS
+  data 06.05.2024
+  by Gianluca Chiaravalloti
+*/
+
+body {
+  background: rgb(0,109,119);
+  background: linear-gradient(45deg, rgba(0,109,119,1) 0%, rgba(237,246,249,1) 32%, rgba(255,221,210,1) 100%);
+  background-repeat: no-repeat;
+}
+
+/* Mobile */
+.hero {
+  margin-top: 120px;
+  /* margin-bottom: 100px; */
+}
+
+.hero h1 span {
+  color: #762B27;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.title h1 {
+  font-size: 2.0rem;
+  font-weight: 700;
+}
+
+#navbarNav {
+  margin-right: 10px;
+  font-size: 1.1rem;
+}
+
+.nav-link {
+  margin-right: 10px;
+}
+
+.nav-link:hover {
+  color: #969494;
+}
+
+.input-group {
+  width: 400px;
+}
+
+.form-control {
+  border: 1px solid #969494;
+}
+
+.nav-item i {
+  font-size: 1.5rem;
+}
+
+#cart {
+  font-size: 1.5rem;
+}
+
+.btn .badge {
+  top: 15px;
+}
+
+#empty {
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+
+footer {
+  margin-top: auto;
+  color: #000;
+}
+
+footer i {
+  font-size: 2.0rem;
+}
+
+.product {
+  margin-top: 100px;
+  /* margin-bottom: 100px; */
+}
+
+#product-detail img {
+  width: 250px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* End Mobile */
+
+
+/* View Tablet */
+@media (min-width: 431px) {
+
+}
+/* End Tablet */
+
+
+/* View Desktop */
+@media (min-width: 1439px) {
+
+  .navbar-brand {
+    font-size: 2.0rem;
+  }
+
+  .hero {
+    margin-top: 120px;
+    border-bottom: 1px solid #969494;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+  
+  #product-detail img {
+    width: 300px;
+  }
+
+}
+/* End Desktop */

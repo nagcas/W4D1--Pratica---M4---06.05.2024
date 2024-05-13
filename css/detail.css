@@ -1,0 +1,53 @@
+/*
+  Detail CSS
+  data 06.05.2024
+  by Gianluca Chiaravalloti
+*/
+
+
+/* Mobile */
+.product {
+  margin-top: 100px;
+  /* margin-bottom: 100px; */
+}
+
+#product-detail img {
+  width: auto;
+  max-height: 250px;
+
+}
+/* End Mobile */
+
+
+/* View Tablet */
+@media (min-width: 431px) {
+  
+  .hero {
+    margin-top: 120px;
+    border-bottom: 1px solid #969494;
+  }
+}
+/* End Tablet */
+
+
+/* View Desktop */
+@media (min-width: 1439px) {
+
+  .hero {
+    margin-top: 120px;
+    border-bottom: 1px solid #969494;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+  
+  #product-detail img {
+    width: 300px;
+  }
+
+}
+/* End Desktop */
+
+
+
