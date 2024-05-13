@@ -127,7 +127,7 @@ function viewProducts(products) {
             Add to Cart
           </button>
           <!-- Link per visualizzare i dettagli del prodotto -->
-          <a class="detailProduct btn mb-2 w-100 btn-primary" href="./detail.html?idProduct=${product["_id"]}&titleProduct=${product["name"]}">
+          <a class="detailProduct btn mb-2 w-100 btn-primary" href="./detail.html?idProduct=${product["_id"]}">
             Detail product
           </a>
         </div>

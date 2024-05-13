@@ -15,9 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const params = new URLSearchParams(window.location.search);
   // Estraggo il valore del parametro "idBook"
   const idProduct = params.get("idProduct");
-  // Richiamo il valore del parametro "titleBook"
-  const titleProduct = params.get("titleProduct");
-  // console.log(idBook); // Log di verifica
+
 
   // Fetch!
   fetch(url + idProduct, {
@@ -37,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Convertiamo in json la response
     .then((productDetail) => {
       // Visualizzo nel title del document html il titolo del libro
-      document.title = `EPICMarket - ${titleProduct}`;
+      document.title = `EPICMarket - ${productDetail["name"]}`;
       // Richiamo la funzione che andrà a visualizzare il libro selezionato con id nel mio document html
       detailProduct(productDetail);
     });
