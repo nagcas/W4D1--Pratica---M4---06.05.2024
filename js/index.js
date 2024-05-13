@@ -59,6 +59,14 @@ const totalPriceHtml = document.querySelector(".totalPrice");
  * -----------------------------------------------------
 */
 document.addEventListener("DOMContentLoaded", async () => {
+
+  // let productsBuy = localStorage.getItem("memoryProductsBuy");
+  //   if (productsBuy) {
+  //     amount.innerHTML = productsBuy;  
+  // };
+  
+  //localStorage.removeItem("memoryProducts");
+  //localStorage.removeItem("memoryProductsBuy");
   
   // Inserisco nel document il valore della variabile badge del carrello
   amount.innerText = quantityProductsBuy;
@@ -151,11 +159,7 @@ function addCart(products) {
         // Aggiungo al totale del prezzo la somma del prezzo del singolo prodotto acquistato
         totalPrice += parseFloat(product["price"]);
         // Aggiungo al catalogo i miei acquisti il codice del prodotto acquistato
-        quantityProducts.push(product["_id"]);
-        
-        // Implemento la funzione per memorizzare il prodotto id nel localstorage
-        localStorage.setItem("memoryProducts", quantityProducts);
-        
+        quantityProducts.push(product["_id"]);        
         // Modifico il testo del pulsante "aggiungi al carrello" con "rimuovi dal carrello"
         codeId.innerHTML = `<i class="bi bi-cart-dash"></i> Remove to Cart`;
         // Rimuovo al button il colore verde
@@ -178,23 +182,29 @@ function addCart(products) {
         // Rimuovo al button il colore rosso
         codeId.classList.remove("btn-danger");
         // Aggiungo al button il colore verde
-        codeId.classList.add("btn-success");
-        
-        // Implemento la funzione per aggiornare il contenuto della memoria dei prodotti nel localstorage
-        localStorage.setItem("memoryProducts", quantityProducts);
+        codeId.classList.add("btn-success");  
       };
       // Aggiorno il contenuto al badge dei prodotti acquistati
       amount.innerHTML = quantityProductsBuy;
+      // Implemento la funzione per aggiornare il contenuto della local storage deiprodotti
+      // localStorage.setItem("memoryProductsBuy", quantityProductsBuy);
+      // localStorage.setItem("memoryProducts", quantityProducts);
+      
+
     });
   });
 
   // Visualizzo nel modal il contenuto del mio carrello degli acquisti al click dell'icona cart nel menù
   shopping.addEventListener("click", () => {
 
-    let carrello = localStorage.getItem("memoryProducts");
-    if (carrello) {
-      console.log(carrello);
-    }
+    // let memoryProducts = localStorage.getItem("memoryProducts");
+    // if (memoryProducts) {
+    //   memoryTutto = memoryProducts.split();
+    //   console.log(memoryTutto);
+    // }
+    
+    
+    
     
     // Eseguo una pulizia del suo contenuto
     modalCart.innerHTML = "";
