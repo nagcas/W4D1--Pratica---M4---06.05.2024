@@ -14,8 +14,8 @@ const url = "https://striveschool-api.herokuapp.com/api/product/";
 const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjNhNGY2ZTBiM2IyNTAwMTUxYjU0NzEiLCJpYXQiOjE3MTU1NDQyOTQsImV4cCI6MTcxNjc1Mzg5NH0.LvfHMjTsGRN4TMQ0aqLaBwmJQ9wrX3G_M4Q6whpiwNo";
 
 // Elementi HTML utilizzati nella pagina
-let paramId = new URLSearchParams(window.location.search)
-let id = paramId.get("id")
+let paramId = new URLSearchParams(window.location.search);
+// let id = paramId.get("id");
 
 const form = document.getElementById("createNewProduct");
 const totalProducts = document.getElementById("totalProducts");
@@ -96,7 +96,7 @@ function viewTableProducts(article) {
     <td class="text-truncate">${article["description"]}</td>
     <td>${article["brand"]}</td>
     <td class="text-truncate">${article["imageUrl"]}</td>
-    <td>${parseFloat(article["price"]).toFixed(2)} €</td>
+    <td>${article["price"]} €</td>
     <td class="d-flex justify-content-center align-content-center gap-3">
       <!-- Pulsante per visualizzare i dettagli del prodotto -->
       <button class="btn btn-primary" onclick="previewProduct('${article["_id"]}')" data-bs-toggle="modal" data-bs-target="#previewProduct">
@@ -146,7 +146,7 @@ const createProduct = async () => {
     brand: brandForm, 
     description: descriptionForm, 
     imageUrl: imageUrlForm, 
-    price: priceForm 
+    price: parseFloat(priceForm).toFixed(2)
   };
 
   // Invia la richiesta POST all'API per creare il nuovo prodotto
@@ -218,7 +218,7 @@ async function previewProduct (id) {
       <p>Name: <span class="fw-bold">${article["name"]}</span></p>
       <p>Description: <span class="fw-bold">${article["description"]}</span></p>
       <p>Brand: <span class="fw-bold">${article["brand"]}</span></p>
-      <p>Price: <span class="fw-bold">${parseFloat(article["price"]).toFixed(2)} €</span></p>
+      <p>Price: <span class="fw-bold">${article["price"]} €</span></p>
     </div>
   `;
  
@@ -234,9 +234,9 @@ async function previewProduct (id) {
  * L'ID del prodotto da ottenere. Se non specificato, verrà utilizzato l'ID dalla query string.
 */
 const getValueForm = async (idInInput) => {
-
+   
   // Ottiene l'ID dal parametro di input o dalla query string
-  const id = idInInput || paramId;
+  const id = idInInput || paramId.get("id");
   
   // Verifica se è stato fornito un ID
   if (id) {
@@ -263,7 +263,10 @@ const getValueForm = async (idInInput) => {
     document.getElementById("brand").value = product["brand"];
     document.getElementById("imageUrl").value = product["imageUrl"];
     document.getElementById("price").value = product["price"];
-  };
+  } else {
+    // Resetto il form di inserimento prodotti
+    form.reset();
+  }
 };
 
 
@@ -275,13 +278,13 @@ const getValueForm = async (idInInput) => {
 const modifyProduct = async () => {
   
   // Ottiene l'ID del prodotto dal form
-  const id = document.getElementById('_id').value;
+  const id = document.getElementById("_id").value;
   // Ottiene i valori aggiornati del prodotto dal form
-  const nameForm = document.getElementById('name').value;
-  const descriptionForm = document.getElementById('description').value;
-  const brandForm = document.getElementById('brand').value;
-  const imageUrlForm = document.getElementById('imageUrl').value;
-  const priceForm = document.getElementById('price').value;
+  const nameForm = document.getElementById("name").value;
+  const descriptionForm = document.getElementById("description").value;
+  const brandForm = document.getElementById("brand").value;
+  const imageUrlForm = document.getElementById("imageUrl").value;
+  const priceForm = document.getElementById("price").value;
   
   // Verifica se i campi obbligatori sono stati compilati
   if (!nameForm.trim() || !descriptionForm.trim() || !brandForm.trim() || !imageUrlForm.trim() || !priceForm.trim()) {
@@ -296,7 +299,7 @@ const modifyProduct = async () => {
     description: descriptionForm, 
     brand: brandForm, 
     imageUrl: imageUrlForm, 
-    price: priceForm 
+    price: parseFloat(priceForm).toFixed(2)
   };
 
   // Esegue una richiesta PUT all'API per aggiornare il prodotto

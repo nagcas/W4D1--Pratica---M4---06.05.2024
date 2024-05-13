@@ -330,34 +330,6 @@ function addCart(products) {
 };
 
 
-/**
- * Funzione di ricerca prodotti
- * -------------------------
- * La ricerca non andrà a visualizzare il risultato su una nuova pagina ma andrà a evidenziare di
- * rosso la card ricercata nella stessa index.html e tramite anchor verrà evidenziata la sua posizione
-*/
-function searchproduct() {
-  // Richiamo la funzione ricerca del prodotto al click del pulsante di ricerca
-  inputSearchBtn.addEventListener("click", () => {
-    // Verifico se il testo inserito nell'input di ricerca ha una lunghezza maggiore di 3 caratteri
-    if (inputSearch.value.length > 3) {
-      let titoli = document.querySelectorAll(".card-title");
-      titoli.forEach(titolo => {
-        if (titolo.innerText.toLowerCase().includes(inputSearch.value.toLowerCase())) {
-          inputSearch.classList.remove("border-danger");
-          document.location.href = "#" + titolo.innerText;
-          document.getElementById(`${titolo.innerText}`).style.color = "#c72121";
-        };
-      });
-    } else {
-      document.getElementById("inputSearch").value = "";
-      inputSearch.classList.add("border-danger");
-      document.getElementsByName("search")[0].placeholder = 'enter text longer than 3 characters';
-    };
-  });
-};
-
-
 /** 
  * Funzione visualizza spinner
  * ---------------------------
