@@ -81,11 +81,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Richiamo la funzione visualizza tutti i prodotti nel document html
   viewProducts(products);
   // Richiamo la funzione per aggiungere i prodotti al carrello
-  addCart(products);
-  // Richiamo la funzione di ricerca di un prodotto in funzione del nome
-  //searchproduct();
-  // Richiamo la funzione per resettare la ricerca 
-  resetDocument();
+  addCart(products);  
 });
 
 /**
@@ -156,6 +152,10 @@ function addCart(products) {
         totalPrice += parseFloat(product["price"]);
         // Aggiungo al catalogo i miei acquisti il codice del prodotto acquistato
         quantityProducts.push(product["_id"]);
+        
+        // Implemento la funzione per memorizzare il prodotto id nel localstorage
+        localStorage.setItem("memoryProducts", quantityProducts);
+        
         // Modifico il testo del pulsante "aggiungi al carrello" con "rimuovi dal carrello"
         codeId.innerHTML = `<i class="bi bi-cart-dash"></i> Remove to Cart`;
         // Rimuovo al button il colore verde
@@ -179,6 +179,9 @@ function addCart(products) {
         codeId.classList.remove("btn-danger");
         // Aggiungo al button il colore verde
         codeId.classList.add("btn-success");
+        
+        // Implemento la funzione per aggiornare il contenuto della memoria dei prodotti nel localstorage
+        localStorage.setItem("memoryProducts", quantityProducts);
       };
       // Aggiorno il contenuto al badge dei prodotti acquistati
       amount.innerHTML = quantityProductsBuy;
@@ -187,6 +190,12 @@ function addCart(products) {
 
   // Visualizzo nel modal il contenuto del mio carrello degli acquisti al click dell'icona cart nel menù
   shopping.addEventListener("click", () => {
+
+    let carrello = localStorage.getItem("memoryProducts");
+    if (carrello) {
+      console.log(carrello);
+    }
+    
     // Eseguo una pulizia del suo contenuto
     modalCart.innerHTML = "";
     // Verifico se la quantità dei prodotti acquistati è maggiore di 0
