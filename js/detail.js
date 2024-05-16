@@ -7,13 +7,13 @@
 
 // La funzione viene eseguita nel momento in cui si apre la pagina del document html
 document.addEventListener("DOMContentLoaded", function () {
-  // Inizializzo la variabile url dell'api della lista dei libri presenti nel server
+  // Inizializzo la variabile url dell'api della lista dei prodotti presenti nel server
   //const url = "https://663bb846fee6744a6ea2b604.mockapi.io/articles/";
   const url = "https://striveschool-api.herokuapp.com/api/product/";
   const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjNhNGY2ZTBiM2IyNTAwMTUxYjU0NzEiLCJpYXQiOjE3MTU1NDQyOTQsImV4cCI6MTcxNjc1Mzg5NH0.LvfHMjTsGRN4TMQ0aqLaBwmJQ9wrX3G_M4Q6whpiwNo";
-  // Recupero la stringa (ID) relativa al book 
+  // Recupero la stringa (ID) relativa al prodotto
   const params = new URLSearchParams(window.location.search);
-  // Estraggo il valore del parametro "idBook"
+  // Estraggo il valore del parametro "idProduct"
   const idProduct = params.get("idProduct");
 
 
@@ -34,9 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     // Convertiamo in json la response
     .then((productDetail) => {
-      // Visualizzo nel title del document html il titolo del libro
+      // Visualizzo nel title del document html il titolo del prodotto
       document.title = `EPICMarket - ${productDetail["name"]}`;
-      // Richiamo la funzione che andrà a visualizzare il libro selezionato con id nel mio document html
+      // Richiamo la funzione che andrà a visualizzare il prodotto selezionato con id nel mio document html
       detailProduct(productDetail);
     });
     
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
      * Funzione che visualizza il dettaglio del libro selezionato nel document
     */
     function detailProduct(productDetail) {
-      // Inizializzo la variabile contentBook per creare al sul interno la card del contenuto del libro selezionato
+      // Inizializzo la variabile contentProduct per creare al sul interno la card del contenuto del prodotto selezionato
       let contentProduct = document.getElementById("product-detail");
       // Inserisco all'interno di contentProduct il markup HTML che rappresenta la card del prodotto
       contentProduct.innerHTML = `
